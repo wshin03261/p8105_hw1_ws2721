@@ -1,0 +1,58 @@
+---
+title: "p8105_hw1_ws2721"
+author: "WooJin Shin"
+date: "2024-09-18"
+output: github_document
+---
+
+**Problem 1**
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+Pulling the data
+
+```{r eval = FALSE}
+library(skimr)
+skimr::skim(penguins)
+```
+
+This works and gives most of the information I need, but I could do more.
+
+```{r}
+head(penguins)
+nrow(penguins)
+ncol(penguins)
+mean(penguins[["flipper_length_mm"]], na.rm = TRUE)
+```
+
+According to `head(penguins)` and `nrow(penguins)` and `ncol(penguins)`:
+
+There are total of 344 rows and 8 columns, which means there are 344 observations and 8 variables.
+
+There are 8 variables consist of 3 factor variable type, 3 integer variable type and 2 double variable type.
+
+3 factor variables are "species", "island", and "sex".
+
+3 integer variables are "flipper_length_mm", "body_mass_g", and "year".
+
+2 double variables are "bill_length_mm" and "bill_depth_mm".
+
+The mean of flipper length is 200.9152, with 2 values missing and not included.
+
+```{r}
+library(ggplot2)
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + geom_point(na.rm = TRUE)
+```
+
+Removed 2 missing values from flipper_length and bill_length.
+
+
+**problem 2**
+
+```{r}
+date_frame = (
+  norm_samp = )
+```
+
+
