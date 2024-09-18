@@ -20,6 +20,19 @@ skimr::skim(penguins)
 This works and gives most of the information I need, but I could do more.
 
 ```{r}
+summary(penguins)
+```
+
+This summary gives us the information of the data.
+
+This data shows the sex, bill length, bill depth, flipper length and body mass among 3 species (Adelie, Chinstrap, Gentoo) in 3 islands (Biscoe, Dream, Torgersen) during the time period between 2007 and 2009.
+
+There are 2 NA's in bill length, bill depth, flipper length, and body mass.
+
+There are 11 NA's in sex.
+
+
+```{r}
 head(penguins)
 nrow(penguins)
 ncol(penguins)
@@ -43,6 +56,8 @@ The mean of flipper length is 200.9152, with 2 values missing and not included.
 ```{r}
 library(ggplot2)
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + geom_point(na.rm = TRUE)
+
+ggsave(filename = "penguins.pdf")
 ```
 
 Removed 2 missing values from flipper_length and bill_length.
@@ -50,9 +65,5 @@ Removed 2 missing values from flipper_length and bill_length.
 
 **problem 2**
 
-```{r}
-date_frame = (
-  norm_samp = )
-```
 
 
