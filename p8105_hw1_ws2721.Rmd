@@ -7,7 +7,7 @@ output: github_document
 
 **Problem 1**
 
-```{r}
+```{r include=FALSE}
 data("penguins", package = "palmerpenguins")
 ```
 Pulling the data
@@ -17,7 +17,7 @@ library(skimr)
 skimr::skim(penguins)
 ```
 
-This works and gives most of the information I need, but I could do more.
+This works and gives the information I need, but I could do more.
 
 ```{r}
 summary(penguins)
@@ -56,14 +56,63 @@ The mean of flipper length is 200.9152, with 2 values missing and not included.
 ```{r}
 library(ggplot2)
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + geom_point(na.rm = TRUE)
-
-ggsave(filename = "penguins.pdf")
 ```
 
 Removed 2 missing values from flipper_length and bill_length.
 
+```{r message= FALSE}
+ggsave(filename = "penguins.pdf")
+```
+
+scattor plot saved
 
 **problem 2**
 
+```{r echo = FALSE}
+library(tidyverse)
+```
+
+```{r}
+p2_df = tibble(
+  rsamp = rnorm(10),
+  log_vec = rsamp > 0,
+  char_vec = c("H","E","L","L","O","W","O","R","L","D"),
+  fac_vec = c("lvl1","lvl2","lvl3","lvl1","lvl2","lvl3","lvl2","lvl2","lvl3","lvl3")
+)
+```
+
+Data entry:
+Created the data frame called `p2_df` that includes a random sample of size 10 from a standard Normal distribution, logical vector indicating whether elements of the sample are greater than 0, character vector of length 10, and a factor vector of length 10, with 3 different factor “levels”.
+
+```{r}
+mean(pull(p2_df,rsamp))
+mean(pull(p2_df,log_vec))
+mean(pull(p2_df,char_vec))
+mean(pull(p2_df,fac_vec))
+```
+
+The character vector and factor vector gives NA, which means that the can't calculate the average because it is not numeric or logical. Numeric vectors come out as numbers and logical vectors come out as 1 `TRUE` or 0 `FALSE` that could be used to calculate the mean that will approximate to 0.5. 
 
 
+
+```{r eval = FALSE}
+p2_df |>
+  mutate(
+    rsamp = as.numeric(rsamp),
+    log_vec = as.numeric(log_vec),
+    char_vec = as.numeric(char_vec),
+    fac_vec = as.numeric(fac_vec)
+  )
+```
+
+When converting the each data set to numeric values:
+
+1. The values in `rsamp` correctly shows their numbers.
+
+2. The values in `log_vec` becomes 1 and 0.
+
+3. The values in `char_vec` becomes NA because the character cannot be converted to numbers.
+
+4. The values in `fac_vec` becomes NA because the factor vector cannot be converted to numbers as well.
+
+Since `char_vec` and `fac_vec` cannot be converted to numbers, we can't get the mean. It explains what is happening when we are trying to take the mean.
