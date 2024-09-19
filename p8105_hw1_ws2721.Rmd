@@ -7,10 +7,10 @@ output: github_document
 
 Problem 1
 ------------------------------------------------------------
-```{r include=FALSE}
+```{r include = FALSE}
 data("penguins", package = "palmerpenguins")
 ```
-Pulling the data
+Penguin installed and loaded
 
 ```{r eval = FALSE}
 library(skimr)
